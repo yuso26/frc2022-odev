@@ -28,6 +28,9 @@ public class Robot extends TimedRobot {
   //Intake - Create a motor controller and a pneumatic solenoid
   VictorSP intakeMotor = new VictorSP(3);
   Solenoid intakePneumatic = new Solenoid(0); 
+  VictorSP climberMotor = new VictorSP(4);
+  
+  
 
     /**
    * This method is run when the robot is first started up and should be
@@ -39,6 +42,7 @@ public class Robot extends TimedRobot {
     SendableRegistry.add(drive, "drive");
     SendableRegistry.add(intakeMotor, "intakeMotor");
     SendableRegistry.add(intakePneumatic, "intakePneumatic");
+    SendableRegistry.add(climberMotor, "climberMotor");
   }
 
   /**
@@ -68,6 +72,16 @@ public class Robot extends TimedRobot {
       intakeMotor.set(-1.0);
     } else{
       intakeMotor.stopMotor();
+      
+       if(controller.getAButton()) {climberMotor.set(1);
+                                    
+       else if (controller.getYButton()) {climberMotor.set(-1);
+                                         
+       }else{
+       climberMotor.stopMotor();
+         
+       }
+      
     }
   }
 }
